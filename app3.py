@@ -112,16 +112,19 @@ class ChestXrayBatchApp:
                 # Update status
                 self.status_label.config(text=f'Processing {idx+1}/{total}: {os.path.basename(img_path)}...')
                 
-                # Extract base name without extension
-                base_name = os.path.splitext(os.path.basename(img_path))[0]
+                # Fix for CXAS Windows path bug: replace backslashes with forward slashes
+                # This prevents CXAS from misinterpreting the filename and creating nested directories like root/dcm/000001
+                img_path_for_cxas = img_path.replace('\\', '/')
                 
-                # Create a specific output folder for this image
-                output_dir = os.path.join('app_outputs', base_name)
+                # We just pass 'app_outputs' as the base target.
+                # CXAS will automatically create a folder named after the file (e.g., app_outputs/000001)
+                # because it internally does: outdir = os.path.join(outdir, filename)
+                output_dir = 'app_outputs'
                 os.makedirs(output_dir, exist_ok=True)
                 
                 try:
                     # Run segmentation
-                    res = self.analyzer.process_file(img_path, do_store=True, output_directory=output_dir, create=True, storage_type='png')
+                    res = self.analyzer.process_file(img_path_for_cxas, do_store=True, output_directory=output_dir, create=True, storage_type='png')
                     if 'segmentation_preds' in res:
                         success_count += 1
                 except Exception as e:
