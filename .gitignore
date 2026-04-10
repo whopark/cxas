@@ -1,0 +1,25 @@
+# Ignore Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignore virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Ignore Output directories
+app_outputs/
+outputs/
+
+# Ignore logs
+*.log
+run_cxas_out.txt
+
+# Ignore wheel downloads
+*.whl
+
+# OS generated files
+.DS_Store
+Thumbs.db
