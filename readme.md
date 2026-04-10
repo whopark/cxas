@@ -9,6 +9,7 @@ The project includes three distinct applications to suit different analysis need
 1. **`app.py`**: A basic application to load a single image (PNG/JPG/DCM) and perform the base anatomy segmentation.
 2. **`app2.py`**: An enhanced single-file processor. It allows you to select a DICOM or image file, automatically creates an output directory named after the file (`app_outputs/<filename>/`), and saves all extracted segmentations inside it for clean organization.
 3. **`app3.py`**: A powerful batch-processing application. You can load an entire folder containing multiple images or DICOMs. The app recursively scans for all valid images and automatically runs segmentation for each one, sorting the output masks into individual folders per image.
+4. **`app4.py`**: A built-in true 3D graphics rendering GUI. This app loads an folder of `app3.py` outputs and uses OpenCV and Phong reflection mathematics to morph flat 2D rib masks into photorealistic 3D bone renders natively. It includes features for highlighting suspected fractures and auto-numbering ribs dynamically.
 
 ## Installation & Setup
 
